@@ -175,4 +175,18 @@ describe('Single File Component parser', () => {
     const res = parseComponent(`<template>hi</`)
     expect(res.template.content).toBe('hi')
   })
+
+  it('should parse functional template', () => {
+    const res = parseComponent(`
+      <template functional>
+        <div>hi</div>
+      </template>
+      <script>
+        export default {}
+      </script>
+    `)
+    expect(res.template.content.trim()).toBe('<div>hi</div>')
+    expect(res.template.functional).toBe(true)
+    expect(res.script.content.trim()).toBe('export default {}')
+  })
 })

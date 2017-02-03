@@ -71,6 +71,9 @@ export function parseComponent (
       if (attr.name === 'scoped') {
         block.scoped = true
       }
+      if (attr.name === 'functional') {
+        block.functional = true
+      }
       if (attr.name === 'module') {
         block.module = attr.value || true
       }

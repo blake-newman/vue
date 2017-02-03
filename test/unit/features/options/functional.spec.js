@@ -185,4 +185,19 @@ describe('Options functional', () => {
     const vnode = h('child')
     expect(vnode).toEqual(createEmptyVNode())
   })
+
+  it('should warn when using runtime compiled templates', () => {
+    new Vue({
+      template: `<div><test></test></div>`,
+      components: {
+        test: {
+          functional: true,
+          template: `<div></div>`
+        }
+      }
+    }).$mount()
+
+    expect('Vue templates with functional components are not supported with runtime build.')
+      .toHaveBeenWarned()
+  })
 })
